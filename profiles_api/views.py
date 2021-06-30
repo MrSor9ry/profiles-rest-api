@@ -8,13 +8,14 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
 
-from profiles_api import serializer
+
+from profiles_api import serializers
 from profiles_api import models
 from profiles_api import permissions
 
 
 class testApiView(APIView):
-    serializer_class = serializer.TestSerializer
+    serializer_class = serializers.HelloSerializer
 
     def get(self, request, format=None):
 
@@ -54,7 +55,7 @@ class testApiView(APIView):
 
 
 class testViewSet(viewsets.ViewSet):
-    serializer_class = serializer.TestSerializer
+    serializer_class = serializers.HelloSerializer
 
     def list(self, request):
         a_viewset = [
@@ -97,7 +98,7 @@ class testViewSet(viewsets.ViewSet):
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
-    serializer_class = serializer.UserProfileSerializer
+    serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permissions.UpdateOwnProfile,)
@@ -112,9 +113,9 @@ class UserLoginApiView(ObtainAuthToken):
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
-    serializer_class = serializer.ProfileFeedItemSerializer
+    serializer_class = serializers.ProfileFeedItemSerializer
     queryset = models.ProfileFeedItem.objects.all()
-    permissions_classes = (permissions.UpdateOwnStatus,IsAuthenticated)
+    permissions_classes = (permissions.UpdateOwnStatus ,IsAuthenticated)
 
     def perform_create(self, serializer):
         serializer.save(user_profile=self.request.user)
