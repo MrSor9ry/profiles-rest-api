@@ -120,4 +120,3 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user_profile=self.request.user)
 
-

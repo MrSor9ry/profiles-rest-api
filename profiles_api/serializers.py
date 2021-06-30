@@ -45,3 +45,4 @@ class ProfileFeedItemSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'user_profile':{'read_only':True}
         }
+

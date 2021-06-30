@@ -4,6 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.conf import settings
 
+
 class UserProfileManager(BaseUserManager):
     # User Manager
     def create_user(self, email, name, password=None):
